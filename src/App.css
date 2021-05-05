@@ -1,38 +1,246 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  *{
+    margin : 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  /* header */
+  .headroom {
+    top: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    display: flex!important;
+    -webkit-box-pack: center!important;
+    -ms-flex-pack: center!important;
+    justify-content: center!important;
+    background-color: #F5F5F5;
+    box-shadow: 0 0 2px 0 #888888;
   }
-  to {
-    transform: rotate(360deg);
+  .headroom--unfixed {
+    position: fixed;
+    transform: translateY(0);
   }
-}
+  .headroom--scrolled {
+    transition: transform 200ms ease-in-out;
+  }
+  .headroom--unpinned {
+    transform: translateY(-100%);
+  }
+  .headroom--pinned {
+    transform: translateY(0%);
+  }
+
+  .link{
+    padding-bottom: 5%;
+  }
+  .logo{
+    width: 100px;
+    cursor: pointer;
+  }
+  .nav .link{
+    display: inline-block;
+    list-style: none;
+    margin: 0 40px;
+    padding-top:30px;
+  }
+  .nav li a{
+    text-decoration: none;
+    color: rgb(145, 36, 70);
+    font-size: 23px;
+    font-family: 'Montserrat';
+    padding:10px;
+    transition: color 1s linear;
+    font-weight: 900;
+  }
+  .nav li a:hover, 
+  .nav .active a{
+    text-decoration: none;
+    background-color: rgb(145, 36, 70);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    -webkit-transition: all 800ms ease;
+    -moz-transition: all 800ms ease;
+    -ms-transition: all 800ms ease;
+    -o-transition: all 800ms ease;
+    transition: all 800ms ease;
+    font-weight: 900;
+  }
+  
+
+  /* tournament */
+  .container.tournament{
+    max-width: 100%;
+    padding: 0!important;
+    margin: 0!important;
+  }
+
+  .container.tournament .banner{
+    height:562px;
+  }
+
+  .container.tournament .banner-div,
+  .container.tournament .roadmap-div,
+  .container.tournament .rules-div{
+    margin-bottom: 2px;
+  }
+
+  .container.tournament .roadmap{
+    height:562px;
+  }
+
+  .rules-card{
+    text-align: center!important;
+  }
+
+  .rules-card .rules-card-header h1{
+    color:#860000;
+    text-decoration: none;
+    font-family: "Poppins";
+    font-size: 60px;
+  }
+
+  .rules-card .rules-card-header .rules-accordian-button,
+  .rules-card .rules-card-header .rules-accordian-button:hover{
+    text-decoration: none;
+  }
+  
+  .rule-list{
+    text-align:left;
+  }
+
+  .rule-list i{
+    padding-right: 10px;
+  }
+  .register-div{
+    background: url('./image/register.jpg') no-repeat;
+    background-attachment: fixed; 
+    background-size: cover;
+  }
+
+  .register-div form{
+    padding: 60px 0 40px 0;
+  }
+
+  input[type="text"]{
+    background-color: transparent;
+    border: none;
+    border-bottom:1px solid black;
+  }
+
+  .discord-input{
+    width: 79%;
+  }
+
+  .register-btn{
+    padding: 8px 12px!important;
+    border-radius: 8px!important;
+    background: #860000!important;
+    color: #F5F5F5!important;
+  }
+  /* footer */
+  footer .container{
+    background-color: #F5F5F5;
+    max-width: 100%;
+    padding: 50px 100px 0 100px;
+  }
+  footer .container .logo{
+    width:120px;
+  }
+  footer .container h4{
+    font-weight: 700;
+    padding-bottom: 20px;
+  }
+  footer .container h4:before{
+    content: "";
+    position: absolute;
+    left: 16px;
+    width: 50px;
+    height: 4px;
+    top: 29px;
+    background: red;
+    padding-left: 24px;
+  }
+  footer .container ul{
+    padding-bottom: 15px;
+  }
+  footer .container .footer-link{
+    padding-bottom: 12px;
+    list-style-type: none;
+    position: relative;
+    height: 35px;
+  }
+  footer .container .footer-link a{
+    color:black;
+    font-size: 16px;
+    transition: transform .2s;
+  }
+  footer .container .footer-link a:hover{
+    text-decoration: none;
+    color:#860000;
+    font-size:20px;
+    position: absolute;
+    padding-left:5px;
+  }
+  footer .container .footer-contact-link{
+    padding-bottom: 12px;
+    list-style-type: none;
+    position: relative;
+    height: 35px;
+  }
+  footer .container .footer-contact-link a{
+    color:black;
+    font-size: 14px;
+    transition: transform .2s;
+    font-family: 'Roboto';
+  }
+  footer .container .footer-contact-link a:hover{
+    text-decoration: none;
+  }
+  footer .container .footer-contact-link i{
+    font-size: 14px;
+    margin-right:2px;
+  }
+  .fa-facebook-f{
+    font-size:35px;
+    margin-right: 8px;
+    color:#1877f2
+  }
+  .fa-twitter{
+    font-size:35px;
+    margin-right: 8px;
+    color:#1da1f2
+  }
+  .fa-youtube{
+    font-size:35px;
+    margin-right: 8px;
+    color:#ff0000
+  }
+  .fa-discord{
+    font-size:35px;
+    margin-right: 8px;
+    color:#7289da;
+  }
+  .fa-instagram{
+    font-size:35px;
+    margin-right: 8px;
+    color: #e95950;
+  }
+  .social-link:hover{
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+  }
+  @keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
