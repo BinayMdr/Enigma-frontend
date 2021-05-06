@@ -22,7 +22,7 @@ import Gallery from './component/Gallery';
 import Headroom from 'react-headroom';
 import EnigmaLogo from './image/EnigmaLogo.png'
 
-import { Container,Row,Col,Image} from 'react-bootstrap';
+import { Container,Row,Col,Navbar,Nav} from 'react-bootstrap';
 import  Mailto from 'react-protected-mailto';
 function App() {
 
@@ -51,7 +51,7 @@ function App() {
       }else{
         setContactActive('');
       } 
-      if(url == "http://localhost:3000/"){
+      if(url == "http://localhost:3000/" || url == "http://127.0.0.1:3000/"){
         setHomeActive('active')
         document.title = "Home | Enigma"
       }else{
@@ -79,12 +79,21 @@ function App() {
       }else{
         setContactActive('');
       } 
-      if(url == "http://localhost:3000/"){
+      if(url == "http://localhost:3000" || url == "http://127.0.0.1:3000/"){
         setHomeActive('active')
         document.title = "Home | Enigma"
       }else{
         setHomeActive('');
       } 
+      document.getElementById("myNav").style.width = "0%";
+      window.scrollTo(0, 0);
+    }
+
+    const openNav = () =>{
+      document.getElementById("myNav").style.width = "100%";
+    }
+    const closeNav = () =>{
+      document.getElementById("myNav").style.width = "0%";
     }
   const active = 'active';
   return (
@@ -112,8 +121,18 @@ function App() {
               <li className={`link ${contactActive}`}>
                 <Link to="/contact-us" onClick={checkRoute}>Contact Us</Link>
               </li>
+              <span class="mobile-nav" onClick={openNav}>&#9776;</span>
             </ul>
         </Headroom>
+                <div id="myNav" class="overlay">
+                  <a href="javascript:void(0)" class="closebtn" onClick={closeNav}>&times;</a>
+                  <div class="overlay-content">
+                    <Link to="/" onClick={checkRoute}>Home</Link>
+                    <Link to="/tournament" onClick={checkRoute}>Tournament</Link>
+                    <Link to="/gallery" onClick={checkRoute}>Gallery</Link>
+                    <Link to="/contact-us" onClick={checkRoute}>Contact Us</Link>
+                  </div>
+                </div>
 
             <Switch>
               <Route exact path="/">
@@ -134,11 +153,11 @@ function App() {
         <footer>
           <Container>
             <Row>
-              <Col lg="3" xs="12">
+              <Col sm="6" md="4" lg="3">
                 <img src={EnigmaLogo} alt="Enigma Logo" className="logo"/><br/>
                 <span>Where dream begins!!!</span>
               </Col>
-              <Col lg="3" xs="6"><h4>USEFUL LINKS</h4>
+              <Col sm="6" md="4" lg="3"> <h4>USEFUL LINKS</h4>
                 <ul>
                   <li className="footer-link">
                     <Link to="/" onClick={checkRoute}>Home</Link>
@@ -154,17 +173,17 @@ function App() {
                   </li>
                 </ul>
               </Col>
-              <Col lg="3" xs="6"><h4>NEED HELP?</h4>
+              <Col sm="6" md="4" lg="3"><h4>NEED HELP?</h4>
                 <ul>
                   <li className="footer-contact-link">
-                    <i className="fas fa-envelope"></i><Mailto email="enigmaesports01@gmail.com"/>
+                    <i className="fas fa-envelope"></i><Mailto  className="email" email="enigmaesports01@gmail.com"/>
                   </li>
                   <li className="footer-contact-link">
                     <i className="fas fa-phone"></i><Mailto tel="+977-9849823198"/>
                   </li>
                 </ul>
               </Col>
-              <Col lg="3" xs="12"><h4>FOLLOW US</h4>
+              <Col sm="6" md="6" lg="3" className="follow-us"><h4>FOLLOW US</h4>
                 <a href="https://www.facebook.com/enigmaesp01" target="_blank">
                   <i className="fab fa-facebook-f social-link"></i>
                 </a>

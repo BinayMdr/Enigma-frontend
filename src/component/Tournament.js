@@ -1,8 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import { Container,Image,Accordion,Card,Button,Row,Col} from 'react-bootstrap';
-import Banner from '../image/banner.jpg';
 import {useHistory} from "react-router-dom";
-import {ToastContainer,toast,Zoom} from 'react-toastify';
+import {ToastContainer,toast} from 'react-toastify';
 import axios from 'axios';
 
 const Tournament = (props) => {
@@ -11,9 +10,48 @@ const Tournament = (props) => {
     const [roadmap,setRoadMap] = useState('')
     const [rules,setRules] = useState([])
 
+    const [name,setName] = useState('')
+    const [email,setEmail] = useState('')
+    const [slug,setSlug] = useState('')
+    const [gameId,setGameId] = useState('')
+    const [gamename,setGameName] = useState('')
+    const [discordId,setDiscordId] = useState('')
+    const [profileImage,setProfileImage] = useState('')
+    const [validateImage,setValidateImage] = useState('')
+
     useEffect(() => {
-        // console.log(process.env.REACT_APP_API_URL)
-        if(props.match.params.slug == undefined) history.push('/tournament')
+        
+        if(window.localStorage.getItem('error') != null){
+            toast.error(window.localStorage.getItem('error'))
+            window.localStorage.removeItem('error');
+        }
+
+
+        if(props.match.params.slug != undefined){
+            var form = new FormData();
+            form.append('slug',props.match.params.slug)
+
+            axios.post(`${process.env.REACT_APP_API_URL}/validate-token`,form
+            ).then(response => {
+                console.log(response)
+                    if(response.data.error == true)
+                    {
+                        toast.error(response.data.message)
+                        setTimeout(function(){
+                            history.push('/tournament')
+                          }, 2000);
+                    }
+                    else{
+                        setName(response.data['name'])
+                        setEmail(response.data['email'])
+                        setSlug(response.data['slug'])
+                    }
+            }).catch(e => {
+
+            }) ;  
+        }
+
+       
 
         axios.get(`${process.env.REACT_APP_API_URL}/images`)
         .then(response => {
@@ -33,9 +71,47 @@ const Tournament = (props) => {
     }, []);
 
     const onSubmit = () =>{
-        toast.error("empty")
+        let form = new FormData();
+        form.append('slug',slug)
+        form.append('gameId',gameId)
+        form.append('game_name',gamename)
+        form.append('discordId',discordId)
+        form.append('profileImage',profileImage) 
+        form.append('imageLength',validateImage.length)
+        for(let i in validateImage){
+            console.log(validateImage[i])
+            form.append(`validateImage-${i}`,validateImage[i])
+        }
+
+        axios.post(`${process.env.REACT_APP_API_URL}/register`,form,{
+            headers: { "Content-Type": "multipart/form-data" }
+            }
+        )
+        .then(response => {
+                if(response.data.error == false){
+                   toast.success(response.data.message)
+                   setTimeout(function(){
+                    history.push('/tournament')
+                  }, 2000);
+                }
+            }).catch(e => {
+        });
+
     }
 
+    const profileImageHandler = (e) => {
+        e.preventDefault();
+        setProfileImage(e.target.files[0])
+    }
+
+    const validateImageHandler = (e) => {
+        e.preventDefault();
+        var arr = [];
+        for(let i=0 ; i < e.target.files.length ; i++ ){
+            arr.push(e.target.files[i])
+        }
+        setValidateImage(arr)
+    }
     return(
         <Container className="tournament">
             <ToastContainer/>
@@ -57,8 +133,9 @@ const Tournament = (props) => {
                             <Card.Body className="rules-card-body">
                                 <Row>
                                     { rules.map((rule) =>
-                                        <Col xs={12} xl={6} className="rule-list"> <span><i className="fa fa-check-circle"></i></span>
-                                        <span className="rules-description">{rule.description}</span>
+                                        <Col xs={12} xl={6} className="rule-list" key={rule.id}> 
+                                              <div className="rule-icon">  <i className="fa fa-check-circle"></i></div>
+                                                <div className="rules-description">{rule.description}</div>
                                         </Col>
                                     )}
                                 </Row>
@@ -73,31 +150,31 @@ const Tournament = (props) => {
                     <div class="row">
                         <div class="input-container col-6">
                             <label>Full Name</label><br/>		
-                            <input type="text" name="name" id="name"  autocomplete="off" />
+                            <input type="text" name="name" id="name"  autocomplete="off" value={name} onChange={e => setName(e.target.value) } readOnly/>
                         </div>
                         <div class="input-container col-6">		
                             <label>Email</label><br/>
-                            <input type="text" name="email" id="email"  autocomplete="off"/>
+                            <input type="text" name="email" id="email"  autocomplete="off" value={email} onChange={e => setEmail(e.target.value) } readOnly/>
                         </div>
                         <div class="input-container col-6">
                             <label>Game Id</label><br/>	
-                            <input type="text" name="game_id" id="game_id"  autocomplete="off" />
+                            <input type="text" name="game_id" id="game_id"  autocomplete="off" value={gameId} onChange={e => setGameId(e.target.value) }/>
                         </div>
                         <div class="input-container col-6">		
                             <label>Game Name</label><br/>
-                            <input type="text" name="game_name" id="game_name"  autocomplete="off" />
+                            <input type="text" name="game_name" id="game_name"  autocomplete="off" value={gamename} onChange={e => setGameName(e.target.value) }/>
                         </div>
                         <div class="input-container col-12">		
                             <label>Discord Id</label><br/>
-                            <input type="text" name="discord_id" id="discord_id" className="discord-input" autocomplete="off" />
+                            <input type="text" name="discord_id" id="discord_id" className="discord-input" autocomplete="off" value={discordId} onChange={e => setDiscordId(e.target.value) }/>
                         </div>
                         <div class="form-group col-6">	
                             <label class="form-text">Select Profile Image</label> 
-                            <input type="file" class="image-field form-control-file" name="profile_image" />
+                            <input type="file" class="image-field form-control-file" name="profile_image" onChange={profileImageHandler} />
                         </div>
                         <div class="form-group col-6">	
                             <label class="form-text"> Select Validate Image</label>
-                            <input type="file" class="image-field form-control-file" name="validate_images[]"  multiple/>
+                            <input type="file" class="image-field form-control-file" name="validate_images[]"  multiple onChange={validateImageHandler}  />
                         </div>
                         <input type="hidden" name="slug"/>
                         <div class="form-group col-12 text-center">	

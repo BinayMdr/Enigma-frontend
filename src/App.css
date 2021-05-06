@@ -30,7 +30,6 @@
   .headroom--pinned {
     transform: translateY(0%);
   }
-
   .link{
     padding-bottom: 5%;
   }
@@ -67,7 +66,12 @@
     transition: all 800ms ease;
     font-weight: 900;
   }
-  
+  .overlay{
+    display: none;
+  }
+  .mobile-nav{
+    display:none;
+  }
 
   /* tournament */
   .container.tournament{
@@ -76,9 +80,10 @@
     margin: 0!important;
   }
 
-  .container.tournament .banner{
+  /* .container.tournament .banner{
     height:562px;
-  }
+    width:100%;
+  } */
 
   .container.tournament .banner-div,
   .container.tournament .roadmap-div,
@@ -86,65 +91,96 @@
     margin-bottom: 2px;
   }
 
-  .container.tournament .roadmap{
+  /* .container.tournament .roadmap{
     height:562px;
-  }
+    width: 100%;
+  } */
 
-  .rules-card{
+  .rules-div .rules-accordian .rules-card{
     text-align: center!important;
   }
-
-  .rules-card .rules-card-header h1{
+  .rules-div .rules-accordian .rules-card .rules-card-header h1{
     color:#860000;
     text-decoration: none;
     font-family: "Poppins";
     font-size: 60px;
   }
-
   .rules-card .rules-card-header .rules-accordian-button,
   .rules-card .rules-card-header .rules-accordian-button:hover{
     text-decoration: none;
   }
-  
-  .rule-list{
+  .rules-card-body .rule-list{
     text-align:left;
   }
-
-  .rule-list i{
-    padding-right: 10px;
+  .rules-card-body .rule-list .rule-icon{
+    display: inline-block;
+    height: 50px;
+  }
+  .rules-card-body .rule-list .rules-description{
+    display: inline-block;
+    position: absolute;
+    margin-left: 8px;
   }
   .register-div{
     background: url('./image/register.jpg') no-repeat;
     background-attachment: fixed; 
     background-size: cover;
+    height:500px;
+    position: relative;
   }
-
   .register-div form{
-    padding: 60px 0 40px 0;
+    width: 38rem;
+    height: 28rem;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+    border-radius: 10px;
+    position: absolute;
+    z-index: 0;
+    background: inherit;
+    overflow: hidden;
+    left:50px;
+    padding-top:2rem;
+    top:20px;
+    padding-left:25px;
   }
-
+  .register-div form:before{
+    content: "";
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+    filter: blur(10px);
+    margin: -20px;
+  }
+  .register-div form input{
+    width:100%;
+  }
   input[type="text"]{
     background-color: transparent;
     border: none;
     border-bottom:1px solid black;
   }
-
-  .discord-input{
-    width: 79%;
+  input:read-only{
+    cursor: not-allowed;
+    opacity:0.5;
   }
-
   .register-btn{
     padding: 8px 12px!important;
     border-radius: 8px!important;
     background: #860000!important;
     color: #F5F5F5!important;
   }
+
   /* footer */
-  footer .container{
+
+  /* footer .container{
     background-color: #F5F5F5;
     max-width: 100%;
     padding: 50px 100px 0 100px;
-  }
+  } */
   footer .container .logo{
     width:120px;
   }
@@ -203,29 +239,27 @@
     margin-right:2px;
   }
   .fa-facebook-f{
-    font-size:35px;
     margin-right: 8px;
     color:#1877f2
   }
   .fa-twitter{
-    font-size:35px;
     margin-right: 8px;
     color:#1da1f2
   }
   .fa-youtube{
-    font-size:35px;
     margin-right: 8px;
     color:#ff0000
   }
   .fa-discord{
-    font-size:35px;
     margin-right: 8px;
     color:#7289da;
   }
   .fa-instagram{
-    font-size:35px;
     margin-right: 8px;
     color: #e95950;
+  }
+  .social-link{
+    font-size:35px;
   }
   .social-link:hover{
     animation: shake 0.5s;
@@ -243,4 +277,424 @@
     80% { transform: translate(-1px, -1px) rotate(1deg); }
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
+  @media screen and (min-width: 1121px) {
+    .container.tournament .banner{
+      height:470px;
+      width:100%;
+    }
+    .container.tournament .roadmap{
+      height:470px;
+      width: 100%;
+    }
+    .footer-contact-link a{
+      position: absolute;
+      top:2px;
+    }
+    footer .container{
+      background-color: #F5F5F5;
+      max-width: 100%;
+      padding: 30px 60px 0 60px;
+    }
+    footer .container .row .follow-us{
+      padding-left: 30px!important;
+    }
+
+    footer .container .follow-us h4:before{
+      content: "";
+      position: absolute;
+      left: 30px;
+      width: 50px;
+      height: 4px;
+      top: 29px;
+      background: red;
+      padding-left: 24px;
+    }
+    .social-link{
+      font-size:25px;
+    }
+  }
+
+  @media screen and (max-width: 1120px) {
+    .container.tournament .banner{
+      height:380px;
+      width:100%;
+    }
+    .container.tournament .roadmap{
+      height:380px;
+      width: 100%;
+    }
+    footer .container{
+      background-color: #F5F5F5;
+      max-width: 100%;
+      padding: 40px 40px 0 70px;
+    }
+    .footer-contact-link a{
+      position: absolute;
+      top:2px;
+    }
+    footer .container .follow-us h4:before{
+      content: "";
+      position: absolute;
+      left: 30px;
+      width: 50px;
+      height: 4px;
+      top: 29px;
+      background: red;
+      padding-left: 24px;
+    }
+    .social-link{
+      font-size:25px;
+    }
+  }
+
+  @media screen and (max-width: 994px) {
+    .nav .link{
+      display: inline-block;
+      list-style: none;
+      margin: 0 30px;
+      padding-top:30px;
+    }
+    .nav li a{
+      text-decoration: none;
+      color: rgb(145, 36, 70);
+      font-size: 20px;
+      font-family: 'Montserrat';
+      padding:10px;
+      transition: color 1s linear;
+      font-weight: 900;
+    }
+    .nav li a:hover, 
+    .nav .active a{
+      text-decoration: none;
+      background-color: rgb(145, 36, 70);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      -webkit-transition: all 800ms ease;
+      -moz-transition: all 800ms ease;
+      -ms-transition: all 800ms ease;
+      -o-transition: all 800ms ease;
+      transition: all 800ms ease;
+      font-weight: 900;
+    }
+    .container.tournament .banner{
+      height:380px;
+      width:100%;
+    }
+    .container.tournament .roadmap{
+      height:380px;
+      width: 100%;
+    }
+    footer .container{
+      background-color: #F5F5F5;
+      max-width: 100%;
+      padding: 40px 40px 10px 40px;
+    }
+    .social-link{
+      font-size:25px;
+    }
+  }
+
+  @media screen and (max-width: 860px) {
+    .nav .link{
+      display: inline-block;
+      list-style: none;
+      margin: 0 20px;
+      padding-top:30px;
+    }
+    .nav li a{
+      text-decoration: none;
+      color: rgb(145, 36, 70);
+      font-size: 18px;
+      font-family: 'Montserrat';
+      padding:10px;
+      transition: color 1s linear;
+      font-weight: 900;
+    }
+    .nav li a:hover, 
+    .nav .active a{
+      text-decoration: none;
+      background-color: rgb(145, 36, 70);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      -webkit-transition: all 800ms ease;
+      -moz-transition: all 800ms ease;
+      -ms-transition: all 800ms ease;
+      -o-transition: all 800ms ease;
+      transition: all 800ms ease;
+      font-weight: 900;
+    }
+    .container.tournament .banner{
+      height:330px;
+      width:100%;
+    }
+    .container.tournament .roadmap{
+      height:330px;
+      width: 100%;
+    }
+    .social-link{
+      font-size:20px;
+    }
+  }
+
+  @media screen and (max-width: 770px) {
+    .nav .link{
+      display: inline-block;
+      list-style: none;
+      margin: 0 18px;
+      padding-top:30px;
+    }
+    .nav li a{
+      text-decoration: none;
+      color: rgb(145, 36, 70);
+      font-size: 16px;
+      font-family: 'Montserrat';
+      padding:10px;
+      transition: color 1s linear;
+      font-weight: 900;
+    }
+    .nav li a:hover, 
+    .nav .active a{
+      text-decoration: none;
+      background-color: rgb(145, 36, 70);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      -webkit-transition: all 800ms ease;
+      -moz-transition: all 800ms ease;
+      -ms-transition: all 800ms ease;
+      -o-transition: all 800ms ease;
+      transition: all 800ms ease;
+      font-weight: 900;
+    }
+    .container.tournament .banner{
+      height:330px;
+      width:100%;
+    }
+    .container.tournament .roadmap{
+      height:330px;
+      width: 100%;
+    }
+    .register-div form{
+      width: 28rem;
+      height: 28rem;
+      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+      border-radius: 10px;
+      position: absolute;
+      z-index: 0;
+      background: inherit;
+      overflow: hidden;
+      left:50px;
+      padding-top:2rem;
+      top:20px;
+      padding-left:25px;
+    }
+    footer .container{
+      background-color: #F5F5F5;
+      max-width: 100%;
+      padding: 40px 50px 0 100px;
+    }
+  }
+
+  @media screen and (max-width: 636px) {
+    .nav .link{
+      display: inline-block;
+      list-style: none;
+      margin: 0 10px;
+      padding-top:30px;
+    }
+    .nav li a{
+      text-decoration: none;
+      color: rgb(145, 36, 70);
+      font-size: 14px;
+      font-family: 'Montserrat';
+      padding:10px;
+      transition: color 1s linear;
+      font-weight: 900;
+    }
+    .nav li a:hover, 
+    .nav .active a{
+      text-decoration: none;
+      background-color: rgb(145, 36, 70);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      -webkit-transition: all 800ms ease;
+      -moz-transition: all 800ms ease;
+      -ms-transition: all 800ms ease;
+      -o-transition: all 800ms ease;
+      transition: all 800ms ease;
+      font-weight: 900;
+    }
+    .container.tournament .banner{
+      height:330px;
+      width:100%;
+    }
+    .container.tournament .roadmap{
+      height:330px;
+      width: 100%;
+    }
+    .register-div form{
+      width: 28rem;
+      height: 28rem;
+      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+      border-radius: 10px;
+      position: absolute;
+      z-index: 0;
+      background: inherit;
+      overflow: hidden;
+      left:50px;
+      padding-top:2rem;
+      top:20px;
+      padding-left:25px;
+    }
+    footer .container{
+      background-color: #F5F5F5;
+      max-width: 100%;
+      padding: 40px 50px 0 100px;
+    }
+  }
+
+
+ @media screen and (max-width: 600px) {
+    .container.tournament .banner{
+      height:250px;
+      width:100%;
+    }
+    .container.tournament .roadmap{
+      height:250px;
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 580px) {
+    .container.tournament .banner{
+      height:230px;
+      width:100%;
+    }
+    .container.tournament .roadmap{
+      height:230px;
+      width: 100%;
+    }
+    .register-div form{
+      width: 18rem;
+      height: 28rem;
+      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+      border-radius: 10px;
+      position: absolute;
+      z-index: 0;
+      background: inherit;
+      overflow: hidden;
+      left:50px;
+      padding-top:2rem;
+      top:20px;
+      padding-left:25px;
+    }
+    footer .container{
+      background-color: #F5F5F5;
+      max-width: 100%;
+      padding: 30px 50px 20px 30px;
+    }
+    
+    @media screen and (max-width: 536px) {
+      .headroom{
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        align-items: center;
+        display: flex!important;
+        -webkit-box-pack: center!important;
+        -ms-flex-pack: center!important;
+        justify-content: center!important;
+        background-color: #F5F5F5;
+        box-shadow: 0 0 2px 0 #888888;
+        height: 70px;
+      }
+      .nav .link{
+        display: none;
+      }
+      .nav .logo{
+        position: absolute;
+        left:60px;
+        top:5px;
+      }
+      .nav .logo img{
+        width:60px;
+      }
+      .mobile-nav{
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        font-size: 30px;
+        right: 60px;
+      }
+      .overlay {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0, 0.9);
+        overflow-x: hidden;
+        transition: 0.5s;
+        display: block;
+      }
+      .overlay-content {
+        position: relative;
+        top: 25%;
+        width: 100%;
+        text-align: center;
+        margin-top: 30px;
+      }
+      .overlay a {
+        padding: 8px;
+        text-decoration: none;
+        font-size: 36px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+      }
+      .overlay a:hover, .overlay a:focus {
+        color: #f1f1f1;
+      }
+      .overlay .closebtn {
+        position: absolute;
+        top: 20px;
+        right: 45px;
+        font-size: 60px;
+      }
+      .container.tournament .banner{
+        height:200px;
+        width:100%;
+      }
+      .container.tournament .roadmap{
+        height:200px;
+        width: 100%;
+      }
+      .register-div form{
+        width: 18rem;
+        height: 28rem;
+        box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+        border-radius: 10px;
+        position: absolute;
+        z-index: 0;
+        background: inherit;
+        overflow: hidden;
+        left:50px;
+        padding-top:2rem;
+        top:20px;
+        padding-left:25px;
+      }
+      footer .container{
+        background-color: #F5F5F5;
+        max-width: 100%;
+        padding: 30px 50px 20px 30px;
+      }
+    }
   }
