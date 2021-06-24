@@ -20,38 +20,28 @@ const Tournament = (props) => {
     const [validateImage,setValidateImage] = useState('')
 
     useEffect(() => {
-        
-        if(window.localStorage.getItem('error') != null){
-            toast.error(window.localStorage.getItem('error'))
-            window.localStorage.removeItem('error');
-        }
-
-
         if(props.match.params.slug != undefined){
             var form = new FormData();
             form.append('slug',props.match.params.slug)
 
             axios.post(`${process.env.REACT_APP_API_URL}/validate-token`,form
             ).then(response => {
-                console.log(response)
-                    if(response.data.error == true)
-                    {
-                        toast.error(response.data.message)
-                        setTimeout(function(){
-                            history.push('/tournament')
-                          }, 2000);
-                    }
-                    else{
-                        setName(response.data['name'])
-                        setEmail(response.data['email'])
-                        setSlug(response.data['slug'])
-                    }
+                if(response.data.error == true)
+                {
+                    toast.error(response.data.message)
+                    setTimeout(function(){
+                        history.push('/tournament')
+                        }, 2000);
+                }
+                else{
+                    setName(response.data['name'])
+                    setEmail(response.data['email'])
+                    setSlug(response.data['slug'])
+                }
             }).catch(e => {
-
+                console.log(e.errors)
             }) ;  
         }
-
-       
 
         axios.get(`${process.env.REACT_APP_API_URL}/images`)
         .then(response => {
@@ -65,38 +55,63 @@ const Tournament = (props) => {
             setRules(response.data)
             }).catch(e => {
         });
-
-       
-        
+    
     }, []);
 
     const onSubmit = () =>{
-        let form = new FormData();
-        form.append('slug',slug)
-        form.append('gameId',gameId)
-        form.append('game_name',gamename)
-        form.append('discordId',discordId)
-        form.append('profileImage',profileImage) 
-        form.append('imageLength',validateImage.length)
-        for(let i in validateImage){
-            console.log(validateImage[i])
-            form.append(`validateImage-${i}`,validateImage[i])
+        if(slug == ''){
+            toast.error("You don't have a token!!!")
+        }else if(gameId == ''){
+            toast.error("Please fill Game Id field")
+        }else if(gamename == ''){
+            toast.error("Please fill Game Name field")
+        }else if(discordId == ''){
+            toast.error("Please fill Discord Id field")
+        }else if(profileImage == ''){
+            toast.error("Please upload the profile image as well")
+        }else if(validateImage == ''){
+            toast.error("Please upload the validate image as well")
         }
-
-        axios.post(`${process.env.REACT_APP_API_URL}/register`,form,{
-            headers: { "Content-Type": "multipart/form-data" }
+        else{
+            let form = new FormData();
+            form.append('slug',slug)
+            form.append('gameId',gameId)
+            form.append('game_name',gamename)
+            form.append('discordId',discordId)
+            form.append('profileImage',profileImage) 
+            form.append('imageLength',validateImage.length)
+            for(let i in validateImage){
+                form.append(`validateImage-${i}`,validateImage[i])
             }
-        )
-        .then(response => {
-                if(response.data.error == false){
-                   toast.success(response.data.message)
-                   setTimeout(function(){
-                    history.push('/tournament')
-                  }, 2000);
+            axios.post(`${process.env.REACT_APP_API_URL}/register`,form,{
+                headers: { "Content-Type": "multipart/form-data","Accept":"application/json" }
                 }
-            }).catch(e => {
-        });
-
+            )
+            .then(response => {
+                    if(response.data.error == false){
+                        toast.success(response.data.message)
+                        setSlug('')
+                        setGameId('')
+                        setGameName('')
+                        setDiscordId('')
+                        setProfileImage('')
+                        setValidateImage('')
+                        setTimeout(function(){
+                            history.push('/tournament')
+                        }, 2000);
+                    }else{
+                        toast.error(response.data.message)
+                    }
+                    document.getElementById('profileImage').value = null
+                    document.getElementById('validateImage').value = null
+                    document.getElementById('full_name').value = null
+                    document.getElementById('email').value = null
+                }).catch(errors => {
+                    document.getElementById('profileImage').value = null
+                    document.getElementById('validateImage').value = null
+                    toast.error('Please upload image only')
+            });
+        }
     }
 
     const profileImageHandler = (e) => {
@@ -116,10 +131,39 @@ const Tournament = (props) => {
         <Container className="tournament">
             <ToastContainer/>
             <div className="banner-div">
-                <Image src={`${process.env.REACT_APP_STORAGE_URL}${ bannerimage.image}`} className="banner"/>
+                {   bannerimage != '' &&
+                    <Image src={`${process.env.REACT_APP_STORAGE_URL}${ bannerimage.image}`} className="banner"/>
+                }
+            </div>
+            <div className="about-tournament">
+                <div className="heading-div">
+                    <h3>About Tournament</h3>
+                </div>
+                <div>
+                        <p>
+                        Enigma is  the group formed by the group of young people who 
+                        have a goal to bring the positive change in the field of gaming 
+                        industry. Hoping for the best, and support from the Nepali gamers 
+                        for this huge step in the field gaming industry. Jay Nepal.
+                        Enigma is  the group formed by the group of young people who 
+                        have a goal to bring the positive change in the field of gaming 
+                        industry. Hoping for the best, and support from the Nepali gamers 
+                        for this huge step in the field gaming industry. Jay Nepal.
+                        Enigma is  the group formed by the group of young people who 
+                        have a goal to bring the positive change in the field of gaming 
+                        industry. Hoping for the best, and support from the Nepali gamers 
+                        for this huge step in the field gaming industry. Jay Nepal.
+                        Enigma is  the group formed by the group of young people who 
+                        have a goal to bring the positive change in the field of gaming 
+                        industry. Hoping for the best, and support from the Nepali gamers 
+                        for this huge step in the field gaming industry. Jay Nepal.
+                        </p>
+                 </div>
             </div>
             <div className="roadmap-div">
-                <Image src={`${process.env.REACT_APP_STORAGE_URL}${ roadmap.image}`} className="roadmap"/>
+                { roadmap != '' &&
+                    <Image src={`${process.env.REACT_APP_STORAGE_URL}${ roadmap.image}`} className="roadmap"/>
+                }
             </div>
             <div className="rules-div">
                 <Accordion className="rules-accordian">
@@ -132,10 +176,10 @@ const Tournament = (props) => {
                         <Accordion.Collapse eventKey="0" className="rules-accordian-collapse">
                             <Card.Body className="rules-card-body">
                                 <Row>
-                                    { rules.map((rule) =>
-                                        <Col xs={12} xl={6} className="rule-list" key={rule.id}> 
-                                              <div className="rule-icon">  <i className="fa fa-check-circle"></i></div>
-                                                <div className="rules-description">{rule.description}</div>
+                                    { rules.length != 0 &&
+                                        rules.map((rule,index) =>
+                                        <Col xs={12} xl={6} className="rule-list" key={rule.id}>
+                                            <div className="rules-description">  {rule.description}</div>
                                         </Col>
                                     )}
                                 </Row>
@@ -145,16 +189,16 @@ const Tournament = (props) => {
                 </Accordion>
             </div>
             <div className="register-div">
-                <form class="col-md-6 offset-md-3 col-sm-6 offset-sm-3">
+                <form>
                     <h3 class="text-center">Register Here!!!</h3>
                     <div class="row">
                         <div class="input-container col-6">
                             <label>Full Name</label><br/>		
-                            <input type="text" name="name" id="name"  autocomplete="off" value={name} onChange={e => setName(e.target.value) } readOnly/>
+                            <input type="text" name="name" id="name"  autocomplete="off" value={name} id="full_name" onChange={e => setName(e.target.value) } readOnly/>
                         </div>
                         <div class="input-container col-6">		
                             <label>Email</label><br/>
-                            <input type="text" name="email" id="email"  autocomplete="off" value={email} onChange={e => setEmail(e.target.value) } readOnly/>
+                            <input type="text" name="email" id="email"  autocomplete="off" value={email} id="email" onChange={e => setEmail(e.target.value) } readOnly/>
                         </div>
                         <div class="input-container col-6">
                             <label>Game Id</label><br/>	
@@ -170,11 +214,11 @@ const Tournament = (props) => {
                         </div>
                         <div class="form-group col-6">	
                             <label class="form-text">Select Profile Image</label> 
-                            <input type="file" class="image-field form-control-file" name="profile_image" onChange={profileImageHandler} />
+                            <input type="file" class="image-field form-control-file" name="profile_image" id="profileImage" onChange={profileImageHandler} />
                         </div>
                         <div class="form-group col-6">	
                             <label class="form-text"> Select Validate Image</label>
-                            <input type="file" class="image-field form-control-file" name="validate_images[]"  multiple onChange={validateImageHandler}  />
+                            <input type="file" class="image-field form-control-file" name="validate_images[]" id="validateImage" multiple onChange={validateImageHandler}  />
                         </div>
                         <input type="hidden" name="slug"/>
                         <div class="form-group col-12 text-center">	

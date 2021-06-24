@@ -16,6 +16,10 @@
     justify-content: center!important;
     background-color: #F5F5F5;
     box-shadow: 0 0 2px 0 #888888;
+    z-index: 2!important;
+  }
+  .headroom-wrapper{
+    height:100px;
   }
   .headroom--unfixed {
     position: fixed;
@@ -73,6 +77,108 @@
     display:none;
   }
 
+  /* Home */
+  .container.aboutUs{
+    max-width: 100%;
+    padding: 0;
+    background:whitesmoke;
+    overflow-y: hidden;
+  }
+
+  .container .banner{
+    height:470px;
+    width:100%;
+  }
+  .container.aboutUs .who-are-we,
+  .container.aboutUs .objectives{
+    padding:0 2rem;
+  }
+
+  div.our-team{
+    padding:0 2rem;
+  }
+
+  div.our-team .image-card{
+      width:100%;
+      position:relative;
+      float:left;
+      margin-bottom:20px;
+      height:350px;
+      margin-right:20px;
+  }
+ 
+  div.our-team .image-card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index:1;
+  }
+  div.our-team .image-card .user-social-link{
+    position:absolute;
+    top:130px;
+    left:40%;
+    display: none;
+  }
+
+  div.our-team .image-card:hover > .user-social-link{
+    display: block;
+  }
+  
+  div.our-team .image-card .user-social-link i{
+    font-size: 20px;
+    color:#00000096;
+  }
+
+  div.our-team .image-card .user-social-link .fa-facebook-f:hover{
+    color:#1877f2;
+  }
+  div.our-team  .image-card .user-social-link .fa-instagram:hover{
+    color:#e95950;
+  }
+  div.our-team .image-card .user-social-link .fa-linkedin:hover{
+      color:#0077B5;
+    }
+
+  
+  div.our-team .image-card:hover > a img{
+    filter: blur(4px);
+  }
+  
+  div.our-team .image-card .user-details{
+    position:absolute;
+    bottom:0;
+    text-align:center;
+    width:100%;
+    background-color:#00000096;
+    padding-bottom:10px;
+    z-index:99;
+  }
+  /* .container.our-team div{
+    padding-left: 2px;
+  } */
+
+
+  /* .container.our-team .card{
+    margin-bottom: 15px;
+  }
+  .container.our-team .card-header{
+    background: url('./image/banner.jpg');
+  }
+  .container.our-team .card-body{
+    text-align: center;
+  }
+  .container.our-team .card-body h1{
+    font-size: 18px;
+  }
+  .container.our-team .card-body span{
+    font-size: 14px;
+    display: block;
+    margin-bottom: 14px;
+  }
+  .container.our-team .social-link{
+    font-size: 10px;
+  } */
+
   /* tournament */
   .container.tournament{
     max-width: 100%;
@@ -96,6 +202,19 @@
     width: 100%;
   } */
 
+  .container.tournament .about-tournament{
+    background-color: whitesmoke;
+    padding-bottom: 10px;
+  }
+  .container.tournament .about-heading h1{
+    text-align: center;
+  }
+  
+  .container.tournament p{
+    padding:0 10px;
+    margin:0!important;
+  }
+
   .rules-div .rules-accordian .rules-card{
     text-align: center!important;
   }
@@ -116,11 +235,11 @@
     display: inline-block;
     height: 50px;
   }
-  .rules-card-body .rule-list .rules-description{
-    display: inline-block;
+  /* .rules-card-body .rule-list .rules-description{ */
+    /* display: inline-block;
     position: absolute;
-    margin-left: 8px;
-  }
+    margin-left: 8px; */
+  /* } */
   .register-div{
     background: url('./image/register.jpg') no-repeat;
     background-attachment: fixed; 
@@ -129,18 +248,17 @@
     position: relative;
   }
   .register-div form{
-    width: 38rem;
-    height: 28rem;
+    width: 40rem;
+    height: 25rem;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
     border-radius: 10px;
     position: absolute;
     z-index: 0;
     background: inherit;
     overflow: hidden;
-    left:50px;
-    padding-top:2rem;
-    top:20px;
-    padding-left:25px;
+    left:30%;
+    top:22px;
+    padding: 25px 25px 0 25px;
   }
   .register-div form:before{
     content: "";
@@ -158,7 +276,7 @@
   .register-div form input{
     width:100%;
   }
-  input[type="text"]{
+  .register-div form input[type="text"]{
     background-color: transparent;
     border: none;
     border-bottom:1px solid black;
@@ -174,6 +292,12 @@
     color: #F5F5F5!important;
   }
 
+  /* Gallery */
+  .gallery-container{
+    margin:10rem 0;
+  }
+
+
   /* footer */
 
   /* footer .container{
@@ -181,6 +305,10 @@
     max-width: 100%;
     padding: 50px 100px 0 100px;
   } */
+  footer{
+    box-shadow: 0 0 2px 0 #888888;
+  }
+
   footer .container .logo{
     width:120px;
   }
@@ -262,24 +390,93 @@
     font-size:35px;
   }
   .social-link:hover{
-    animation: shake 0.5s;
-    animation-iteration-count: infinite;
+    transform: rotate(-10deg);
   }
-  @keyframes shake {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
-    30% { transform: translate(3px, 2px) rotate(0deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg); }
-    60% { transform: translate(-3px, 1px) rotate(0deg); }
-    70% { transform: translate(3px, 1px) rotate(-1deg); }
-    80% { transform: translate(-1px, -1px) rotate(1deg); }
-    90% { transform: translate(1px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
+
+  .who-are-we{
+    background-color: ghostwhite;
+  }
+
+  .who-are-we div{
+    position:relative;
+    height:230px;
+  }
+
+  .who-are-we img{
+    width: 20%;
+  }
+
+  .who-are-we p{
+    position:absolute;
+    top:15%;
+    left:22%
+  }
+
+  .our-team{
+    background-color: ghostwhite;
+  }
+
+  .our-team .header-div{
+    margin-bottom: 10px;
+  }
+
+  .our-team .header-div h1{
+    text-align:center;
+    font-size:65px;
+    margin-bottom:15px;
+  }
+
+  .container.contact-us{
+    max-width:100%;
+    padding:0;
+  }
+  .container.contact-us .heading-div{
+    height:250px;
+    background:whitesmoke;
+    position:relative;
+    text-align: center;
+  }
+
+  .container.contact-us .heading-div h3{
+    padding-top:5%;
+    font-size:65px;
+  }
+
+  .container.contact-div form{
+    margin:25px auto;
+    padding:50px 0;
+    width:80%;
+  }
+
+  input.form-control{
+    padding:20px 10px!important;
+    border-radius:6px!important;
+    background-color:whitesmoke!important;
+  }
+
+  textarea.form-control{
+    width:100%;
+    background-color:whitesmoke;
+  }
+
+  .about-tournament{
+    padding: 25px 0;
+  }
+  .about-tournament .heading-div{
+    text-align: center;
+  }
+  .about-tournament .heading-div h3{
+    color: #860000;
+    text-decoration: none;
+    font-family: "Poppins";
+    font-size: 60px;
   }
 
   @media screen and (min-width: 1121px) {
+    .container.aboutUs .banner{
+      height:470px;
+      width:100%;
+    }
     .container.tournament .banner{
       height:470px;
       width:100%;
@@ -314,9 +511,17 @@
     .social-link{
       font-size:25px;
     }
+    .container.contact-us .heading-div h3{
+      padding-top:6%;
+      font-size:65px;
+    }
   }
 
   @media screen and (max-width: 1120px) {
+    .container.aboutUs .banner{
+      height:380px;
+      width:100%;
+    }
     .container.tournament .banner{
       height:380px;
       width:100%;
@@ -334,18 +539,29 @@
       position: absolute;
       top:2px;
     }
-    footer .container .follow-us h4:before{
-      content: "";
-      position: absolute;
-      left: 30px;
-      width: 50px;
-      height: 4px;
-      top: 29px;
-      background: red;
-      padding-left: 24px;
-    }
     .social-link{
       font-size:25px;
+    }
+    .register-div form{
+      width: 40rem;
+      height: 25rem;
+      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+      border-radius: 10px;
+      position: absolute;
+      z-index: 0;
+      background: inherit;
+      overflow: hidden;
+      left:20%;
+      top:22px;
+      padding: 25px 25px 0 25px;
+    }
+    .who-are-we div{
+      position:relative;
+      height:200px;
+    }
+    .container.contact-us .heading-div h3{
+      padding-top:8%;
+      font-size:65px;
     }
   }
 
@@ -395,6 +611,27 @@
     .social-link{
       font-size:25px;
     }
+    .register-div form{
+      width: 40rem;
+      height: 25rem;
+      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+      border-radius: 10px;
+      position: absolute;
+      z-index: 0;
+      background: inherit;
+      overflow: hidden;
+      left:16%;
+      top:22px;
+      padding: 25px 25px 0 25px;
+    }
+    .who-are-we div{
+      position:relative;
+      height:170px;
+    }
+    .container.contact-us .heading-div h3{
+      padding-top:8%;
+      font-size:65px;
+    }
   }
 
   @media screen and (max-width: 860px) {
@@ -427,6 +664,10 @@
       transition: all 800ms ease;
       font-weight: 900;
     }
+    .container.aboutUs .banner{
+      height:330px;
+      width:100%;
+    }
     .container.tournament .banner{
       height:330px;
       width:100%;
@@ -437,6 +678,23 @@
     }
     .social-link{
       font-size:20px;
+    }
+    .register-div form{
+      width: 30rem;
+      height: 25rem;
+      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+      border-radius: 10px;
+      position: absolute;
+      z-index: 0;
+      background: inherit;
+      overflow: hidden;
+      left:22%;
+      top:22px;
+      padding: 25px 25px 0 25px;
+    }
+    .who-are-we div{
+      position:relative;
+      height:150px;
     }
   }
 
@@ -470,14 +728,6 @@
       transition: all 800ms ease;
       font-weight: 900;
     }
-    .container.tournament .banner{
-      height:330px;
-      width:100%;
-    }
-    .container.tournament .roadmap{
-      height:330px;
-      width: 100%;
-    }
     .register-div form{
       width: 28rem;
       height: 28rem;
@@ -496,6 +746,27 @@
       background-color: #F5F5F5;
       max-width: 100%;
       padding: 40px 50px 0 100px;
+    }
+    .register-div form{
+      width: 30rem;
+      height: 25rem;
+      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+      border-radius: 10px;
+      position: absolute;
+      z-index: 0;
+      background: inherit;
+      overflow: hidden;
+      left:15%;
+      top:22px;
+      padding: 25px 25px 0 25px;
+    }
+    .who-are-we img{
+      width:22%;
+    }
+    .who-are-we p{
+      position:absolute;
+      top:15%;
+      left:24%
     }
   }
 
@@ -529,12 +800,84 @@
       transition: all 800ms ease;
       font-weight: 900;
     }
+
+    .register-div form{
+      width: 30rem;
+      height: 28rem;
+      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+      border-radius: 10px;
+      position: absolute;
+      z-index: 0;
+      background: inherit;
+      overflow: hidden;
+      left:12%;
+      padding-top:2rem;
+      top:20px;
+      padding-left:25px;
+    }
+    footer .container{
+      background-color: #F5F5F5;
+      max-width: 100%;
+      padding: 40px 50px 0 100px;
+    }
+    .who-are-we div{
+      height: 380px;
+      text-align: center;
+    }
+    .who-are-we img{
+      width:75%;
+    }
+    .who-are-we p{
+      position:absolute;
+      top:60%;
+      left:0;
+    }
+  }
+
+
+ @media screen and (max-width: 600px) {
+    .container.aboutUs .banner{
+      height:250px;
+      width:100%;
+    }
     .container.tournament .banner{
-      height:330px;
+      height:250px;
       width:100%;
     }
     .container.tournament .roadmap{
-      height:330px;
+      height:250px;
+      width: 100%;
+    }
+    .container.contact-us .heading-div{
+      height: 180px;
+    }
+    .container.contact-us .heading-div h3{
+      padding-top:15%;
+      font-size:50px;
+    }
+    .about-tournament .heading-div h3{
+      color: #860000;
+      text-decoration: none;
+      font-family: "Poppins";
+      font-size: 35px;
+      font-weight: 500;
+    }
+    .about-tournament div p{
+      font-size: 15px;
+    }
+  }
+
+  @media screen and (max-width: 580px) {
+    .container.aboutUs .banner{
+      height:230px;
+      width:100%;
+    }
+    .container.tournament .banner{
+      height:230px;
+      width:100%;
+    }
+    .container.tournament .roadmap{
+      height:230px;
       width: 100%;
     }
     .register-div form{
@@ -546,49 +889,7 @@
       z-index: 0;
       background: inherit;
       overflow: hidden;
-      left:50px;
-      padding-top:2rem;
-      top:20px;
-      padding-left:25px;
-    }
-    footer .container{
-      background-color: #F5F5F5;
-      max-width: 100%;
-      padding: 40px 50px 0 100px;
-    }
-  }
-
-
- @media screen and (max-width: 600px) {
-    .container.tournament .banner{
-      height:250px;
-      width:100%;
-    }
-    .container.tournament .roadmap{
-      height:250px;
-      width: 100%;
-    }
-  }
-
-  @media screen and (max-width: 580px) {
-    .container.tournament .banner{
-      height:230px;
-      width:100%;
-    }
-    .container.tournament .roadmap{
-      height:230px;
-      width: 100%;
-    }
-    .register-div form{
-      width: 18rem;
-      height: 28rem;
-      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
-      border-radius: 10px;
-      position: absolute;
-      z-index: 0;
-      background: inherit;
-      overflow: hidden;
-      left:50px;
+      left:10%;
       padding-top:2rem;
       top:20px;
       padding-left:25px;
@@ -636,7 +937,7 @@
         height: 100%;
         width: 0;
         position: fixed;
-        z-index: 1;
+        z-index: 100;
         top: 0;
         left: 0;
         background-color: rgb(0,0,0);
@@ -669,6 +970,10 @@
         right: 45px;
         font-size: 60px;
       }
+      .container.aboutUs .banner{
+        height:200px;
+        width:100%;
+      }
       .container.tournament .banner{
         height:200px;
         width:100%;
@@ -678,7 +983,7 @@
         width: 100%;
       }
       .register-div form{
-        width: 18rem;
+        width: 21rem;
         height: 28rem;
         box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
         border-radius: 10px;
@@ -686,7 +991,7 @@
         z-index: 0;
         background: inherit;
         overflow: hidden;
-        left:50px;
+        left:4%;
         padding-top:2rem;
         top:20px;
         padding-left:25px;
@@ -698,3 +1003,34 @@
       }
     }
   }
+
+  .owl-theme .owl-nav{
+    margin-top:0!important;
+    padding-bottom: 10px;
+  }
+
+  .owl-nav button{
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    position: relative;
+    /* color: white; */
+    background: #912446!important;
+  }
+
+  .owl-nav button span{
+    border-radius: 50%;
+    font-size: 50px;
+    position: absolute;
+    top: -28px;
+    left: 24%;
+    color: whitesmoke;
+  }
+
+  .who-are-we img{
+    animation: shift 2s;
+    position: relative;
+    transition-timing-function: ease;
+  }
+
+

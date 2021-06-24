@@ -6,6 +6,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {ToastContainer,toast,Zoom} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
+//
+import 'owl.carousel/dist/assets/owl.carousel.css';  
+import 'owl.carousel/dist/assets/owl.theme.default.css';  
+
 //Router
 import {
   BrowserRouter as Router,
@@ -20,10 +24,12 @@ import Tournament from './component/Tournament';
 import Gallery from './component/Gallery';
 
 import Headroom from 'react-headroom';
-import EnigmaLogo from './image/EnigmaLogo.png'
 
 import { Container,Row,Col,Navbar,Nav} from 'react-bootstrap';
 import  Mailto from 'react-protected-mailto';
+
+import EnigmaLogo from './image/EnigmaLogo.png';
+
 function App() {
 
     const [homeActive,setHomeActive] = useState('active');
@@ -57,7 +63,7 @@ function App() {
       }else{
         setHomeActive('');
       } 
-    },[]);
+    });
     
     const checkRoute = (e) =>{
       let url = e.target.href;
@@ -79,7 +85,7 @@ function App() {
       }else{
         setContactActive('');
       } 
-      if(url == "http://localhost:3000" || url == "http://127.0.0.1:3000/"){
+      if(url == "http://localhost:3000/" || url == "http://127.0.0.1:3000/"){
         setHomeActive('active')
         document.title = "Home | Enigma"
       }else{
@@ -149,7 +155,6 @@ function App() {
                 <AboutUs />
               </Route>
             </Switch>
-        
         <footer>
           <Container>
             <Row>
