@@ -44,8 +44,13 @@ const ContactUs = () => {
                     document.getElementById('name').value = null
                     document.getElementById('email').value = null
                     document.getElementById('message').value = null
-                }).catch(errors => {
-                    console.log(errors);
+                }).catch(error => {
+                    var errors = error.response.data.errors;
+                    
+                    Object.keys(errors).forEach(function(key) {
+                            toast.error(errors[key][0])
+                    });
+ 
             });
         }
     }

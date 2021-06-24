@@ -106,10 +106,14 @@ const Tournament = (props) => {
                     document.getElementById('validateImage').value = null
                     document.getElementById('full_name').value = null
                     document.getElementById('email').value = null
-                }).catch(errors => {
+                }).catch(error => {
                     document.getElementById('profileImage').value = null
                     document.getElementById('validateImage').value = null
-                    toast.error('Please upload image only')
+                    var errors = error.response.data.errors;
+        
+                    Object.keys(errors).forEach(function(key) {
+                            toast.error(errors[key][0])
+                    });
             });
         }
     }
